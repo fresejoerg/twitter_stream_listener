@@ -10,11 +10,11 @@ import sys
 import pymongo
 import pandas as pd
 
-consumer_key="Z8ybBG03L5ZOIUzfSKtYzJZg9"
-consumer_secret="JIhOK2mcdfPMX1hGDfTELUJPF0fOB2bJF8zqMMRL7yv8AQ7UKC"
+consumer_key="..."
+consumer_secret="..."
 
-access_token="462635899-Dix7JUt3clsAMtphnaxXxj1g0p2AE7D6hrMG0"
-access_token_secret="Bi7nTQlLlTouwUQEl7nrWS2WkCxc6qVXkNtT2NGYHY"
+access_token="..."
+access_token_secret="..."
 
 auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
 auth.set_access_token(access_token, access_token_secret)
@@ -67,11 +67,6 @@ def mongo_to_df(db,collection,query={}):
     return df
     
 df = mongo_to_df('emopos_es_sad','Tweets')    
-    
-#import unicodedata
-#df['text_ascii'] = df.apply(lambda row: unicodedata.normalize('NFKD', row['text']).encode('ascii','ignore'), axis=1)
-
-#df['text_uni'] = df.apply(lambda row: unicodedata.normalize('NFKD', row['text']), axis=1)
 
 df['text_uni'] = df.apply(lambda row: unicode(row['text'].replace("\n","")), axis=1)
 df['text_uni'].to_csv("X:\Joerg\\twitter_multilanguage_sentiment\emopos_es_sad.csv", sep=",", encoding='utf-8', index=False)
